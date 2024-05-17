@@ -43,7 +43,7 @@ def builder_closure(member_name):
 
 
 # reflect builder names and add builder closure, such as 'TransformerBuilder()' creates op builder wrt current accelerator
-for _, module_name, _ in pkgutil.iter_modules([os.path.dirname(this_module.__file__)]):
+for _, module_name, _ in pkgutil.iter_modules([os.path.dirname(this_module.__file__), os.path.dirname(this_module.__file__).join('cuda')]):
     if module_name != 'all_ops' and module_name != 'builder':
         module = importlib.import_module(f".{module_name}", package=op_builder_dir)
         for member_name in module.__dir__():
